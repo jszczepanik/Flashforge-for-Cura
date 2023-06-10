@@ -1,0 +1,7 @@
+# Makefile's output directory
+./build
+
+# Byte-compiled / optimized / DLL Python files
+__pycache__/
+*.py[cod]
+*$py.class

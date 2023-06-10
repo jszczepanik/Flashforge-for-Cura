@@ -67,47 +67,59 @@ If you save the sliced model as x3g (default for FFCP) and you get an empty file
 
 Or alternatively forget about X3G and use gcode with Octoprint!
 
+#### Build dependencies
+`make` and `PyYAML` are required for the build scripts to work.
+
+If you use Homebrew, you should already have `make` installed. Othewise, install XCode CLI tools and Homebrew, or use a different method of getting these dependencies on your system.
+
+XCode tools and Homebrew can be installed by running the following commands in Terminal:
+```
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Afterwards, you can install PyYAML by running:
+```
+brew update
+brew install pyyaml
+```
+
 #### Into user library (preferred for single-user installations)
 
 This is a preferred way as it should survive application updates.
 The easiest way is to use the supplied script. The script will attempt to install profiles into the latest version of Cura installed on your computer.
 
 1. Open Terminal and navigate to unzipped directory. The easiest way to do it is to type `cd` and drag the unzipped folder into that Terminal window and then press Enter.
-2. Launch install script by executing `bash ./install.sh`
+2. Launch install script by executing `make install`
 3. Monitor output for any errors. If no errors are displayed, you are almost done - please refer to post-install section below.
 
 Alternatively, you can do it manually:
 
-1. Open Cura library folder located at `/Users/your_username/Library/Application\ Support/cura/4.4/` (for 4.4.x, for later versions it will be different). 
-2. Copy files from definitions, extruders and meshes folders from the downloaded ZIP file (or cloned repository) into the respective folders in Cura. You may need to create `meshes` folder first.
-3. Perform steps from post-install section below.
+1. Open Terminal and navigate to unzipped directory.
+2. Build the configs by executing `make build`. There should be no errors, and a new directory named `build` should appear.
+3. Open Cura library folder located at `/Users/your_username/Library/Application\ Support/cura/4.4/` (for 4.4.x, for later versions it will be different). 
+3. Copy files from definitions, extruders and meshes folders from the new `build` directory into the respective folders in Cura. You may need to create `meshes` folder first.
+4. Perform steps from post-install section below.
 
 #### Into Application (if you have multiple user accounts on your Mac that will need to use this printer)
 
-1. Open your Applications folder in Finder and right-click on Ultimaker Cura. Click on Show Package Contents.
-2. Then go to Contents/Resources/resources and copy files from definitions, extruders and meshes folders from the downloaded ZIP file (or cloned repository) into the respective folders in Cura.
-3. Perform steps from post-install section below.
+1. Open Terminal and navigate to unzipped directory. The easiest way to do it is to type `cd` and drag the unzipped folder into that Terminal window and then press Enter.
+2. Launch build script by executing `make build`. There should be no errors, and a new directory named `build` should appear.
+3. Open your Applications folder in Finder and right-click on Ultimaker Cura. Click on Show Package Contents.
+4. Then go to Contents/Resources/resources and copy files from definitions, extruders and meshes folders from new `build` director into the respective folders in Cura.
+5. Perform steps from post-install section below.
 
 ### Linux
+#### Build dependencies
+`make` and `PyYAML` are required for the build scripts to work. Please refer to your distribution's docs for specific instructions on how to install them.
 
-Change to unzipped folder and run `bash ./install.sh`
+For Debian and Ubuntu you can use these command:
+```
+sudo apt install make python3-yaml
+```
 
-### Windows
-
-#### Into local AppData (preferred for single-user installations)
-
-This is a preferred way as it should survive application updates.
-
-1. Open Cura library folder located at `C:\Users\your_username\AppData\Roaming\cura\4.4` (for 4.4.x, for later versions it will be different). 
-2. Copy files from definitions, extruders and meshes folders from the downloaded ZIP file (or cloned repository) into the respective folders in Cura. You may need to create `meshes` folder first.
-3. Perform steps from post-install section below.
-
-#### Into application folder (if you have multiple user accounts on your PC that will need to use this printer)
-
-1. Open Cura application resources folder located at `C:\Program Files\Ultimaker Cura 4.4\resources` (for 4.4.x, for later versions it will be different). 
-2. Then copy files from definitions, extruders and meshes folders from the downloaded ZIP file (or cloned repository) into the respective folders in Cura. 
-3. Perform steps from post-install section below.
-
+#### Installation
+Change to unzipped folder and run `make install`.
 
 ## Post-install
 

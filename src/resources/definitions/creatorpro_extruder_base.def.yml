@@ -1,0 +1,25 @@
+id: creatorpro_extruder_base
+inherits: fdmextruder
+metadata:
+  visible: false
+name: Base Extruder (do not use)
+overrides: {}
+settings:
+  initial_pos_gcode:
+    default_value: ''
+    description: Performs initial positioning based on selected extruder
+    label: Initial positioning GCode
+    settable_per_extruder: true
+    settable_per_mesh: false
+    settable_per_meshgroup: false
+    type: str
+  nozzle_wipe_gcode:
+    default_value: ''
+    description: Performs nozzle wipe based on selected extruder
+    label: Nozzle Wipe GCode
+    settable_per_extruder: true
+    settable_per_mesh: false
+    settable_per_meshgroup: false
+    type: str
+version: 2
+
