@@ -26,12 +26,12 @@ CURA_WIKI_GIT_REF := 672c7dd96e26173d617dbb772bd0e4e753163ad3
 build: $(OBJS)
 
 $(BUILD_DIR)/%.def.json: $(SRC_DIR)/%.def.yml $(YAML_TO_JSON)
-	mkdir -p -- $(@D)
-	cat $< | $(PYTHON) $(YAML_TO_JSON) > $@
+	mkdir -p -- '$(@D)'
+	cat '$<' | $(PYTHON) '$(YAML_TO_JSON)' > '$@'
 
 $(BUILD_DIR)/%.stl: $(SRC_DIR)/%.stl
-	mkdir -p -- $(@D)
-	cp -- $< $@
+	mkdir -p -- '$(@D)'
+	cp -- '$<' '$@'
 
 
 .PHONY: download_cura_docs
@@ -40,35 +40,35 @@ download_cura_docs: $(CURA_DOCS_DIR)/fdmprinter.def.json \
 	$(CURA_DOCS_DIR)/wiki
 
 $(CURA_DOCS_DIR)/fdmprinter.def.json: $(CURA_GIT_REPO_DIR)/resources/definitions/fdmprinter.def.json
-	mkdir -p -- $(@D)
-	cp -- $< $@
+	mkdir -p -- '$(@D)'
+	cp -- '$<' '$@'
 
 $(CURA_DOCS_DIR)/fdmextruder.def.json: $(CURA_GIT_REPO_DIR)/resources/definitions/fdmextruder.def.json
-	mkdir -p -- $(@D)
-	cp -- $< $@
+	mkdir -p -- '$(@D)'
+	cp -- '$<' '$@'
 
 $(CURA_DOCS_DIR)/wiki: $(CURA_WIKI_GIT_REPO_DIR)
-	mkdir -p -- $@
-	git -C $< checkout-index -f -a --prefix=$$(realpath $@)/
+	mkdir -p -- '$@'
+	git -C '$<' checkout-index -f -a --prefix="$$(realpath '$@')/"
 
 # GitHub does not support `git archive --remote=`, so we're using
 # checkout magic to download the files that we want without
 # downloading the whole repo.
 $(CURA_GIT_REPO_DIR):
-	git clone --depth=1 --filter=blob:none --sparse --single-branch --no-checkout -- $(CURA_GIT_REPO_URL) $@
-	git -C $@ fetch --depth=1 origin $(CURA_GIT_REF)
-	git -C $@ reset --hard $(CURA_GIT_REF)
-	git -C $@ sparse-checkout init
+	git clone --depth=1 --filter=blob:none --sparse --single-branch --no-checkout -- '$(CURA_GIT_REPO_URL)' '$@'
+	git -C '$@' fetch --depth=1 origin '$(CURA_GIT_REF)'
+	git -C '$@' reset --hard '$(CURA_GIT_REF)'
+	git -C '$@' sparse-checkout init
 
 $(CURA_GIT_REPO_DIR)/%: $(CURA_GIT_REPO_DIR)
-	git -C $(BUILD_DIR)/Cura.git sparse-checkout add $*
+	git -C '$(BUILD_DIR)/Cura.git' sparse-checkout add '$*'
 
 $(CURA_WIKI_GIT_REPO_DIR):
-	mkdir -p -- $(@D)
-	git clone --depth=1 --filter=blob:none --single-branch --no-checkout -- $(CURA_WIKI_GIT_REPO_URL) $@
-	git -C $@ fetch --depth=1 origin $(CURA_WIKI_GIT_REF)
-	git -C $@ reset --hard $(CURA_WIKI_GIT_REF)
-	git -C $@ checkout $(CURA_WIKI_GIT_REF) .
+	mkdir -p -- '$(@D)'
+	git clone --depth=1 --filter=blob:none --single-branch --no-checkout -- '$(CURA_WIKI_GIT_REPO_URL)' '$@'
+	git -C '$@' fetch --depth=1 origin '$(CURA_WIKI_GIT_REF)'
+	git -C '$@' reset --hard '$(CURA_WIKI_GIT_REF)'
+	git -C '$@' checkout '$(CURA_WIKI_GIT_REF)' .
 
 
 .PHONY: install
@@ -78,4 +78,4 @@ install: build
 
 .PHONY: clean
 clean:
-	rm -rf -- $(BUILD_DIR) $(CURA_DOCS_DIR)
+	rm -rf -- '$(BUILD_DIR)' '$(CURA_DOCS_DIR)'
