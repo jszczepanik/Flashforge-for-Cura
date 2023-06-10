@@ -1,5 +1,5 @@
 # Makefile's output directory
-./build
+/build
 
 # Byte-compiled / optimized / DLL Python files
 __pycache__/
