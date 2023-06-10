@@ -132,4 +132,7 @@ Remember, that that extruder 1 is right and extruder 2 is left. The easiest way 
 
 Please open an issue if you find a bug or something is not working.
 
+## Developing the definition files
+Should you want to modify the definition files, you can find them as .def.yml files in the `src` directory. After modifying them, run the relevant installation commands to produce the final .def.json files.
 
+If you have `git` in your system, you can run `make download_cura_docs` to obtain documentation relevant to writing definition files.

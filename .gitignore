@@ -1,5 +1,6 @@
 # Makefile's output directory
 /build
+/cura_docs
 
 # Byte-compiled / optimized / DLL Python files
 __pycache__/
